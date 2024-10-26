@@ -27,11 +27,18 @@ app.use(cookieParser()) // via cookie parser , we give access of all cookies to 
  //***********************************ROUTES***********************************
 //  import userRouter from './route/user.router.js' // as user.routers.js export default a fxn , its doesn't matter what name u gove to that fxn here
 
+import userRouter from "./route/user.router.js"
+import truckRouter from "./route/truck.router.js"
+
  // routes decleration
  // to apply routes , use middleware here
 //  app.use("/users" , userRouter /* which router i want to activate at /user , whenever i type /user , middleware gives control to userrouter */)
-//  app.use("/api/v1/users" , userRouter)
+ app.use("/api/v1/users/user" , userRouter)
+ app.use("/api/v1/users/truck" , truckRouter)
  // http://localhost:8000/api/v1/users/register    "THIS IS HOW URL IS MADE" now no changes in app.js , if we want login , go to userrouter nd add login route
+
+//  http://localhost:8000/api/v1/users/user
+//  http://localhost:8000/api/v1/users/truck
 
 
 export {app}
