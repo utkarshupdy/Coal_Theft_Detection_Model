@@ -11,13 +11,13 @@ import {upload} from "../middleware/multer.middleware.js"
 import {verifyJWT} from "../middleware/auth.middleware.js"
 
 const router = Router()
-router.route("/add-truck").post(
+router.route("/add-truck").post(verifyJWT ,
     upload.fields([
         {
             name: "driverPhoto",
             maxCount:1,
         }
-    ]) , addTruck
+    ])  , addTruck
 )
 
 router.route("/delete-truck").post(verifyJWT , deleteTruck);

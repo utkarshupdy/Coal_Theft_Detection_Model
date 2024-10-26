@@ -19,7 +19,7 @@ const truckSchema = new Schema({
     },
     driverPhoto: {
         type: String,
-        required: true,
+        // required: true,
     },
     driverContact: {
         type: Number,

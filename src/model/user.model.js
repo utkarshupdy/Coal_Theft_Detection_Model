@@ -19,7 +19,7 @@ const userSchema = new Schema({
     },
     avatar: {
         type: String,
-        required: true,
+        // required: true,
     },
     contact: {
         type: Number,
