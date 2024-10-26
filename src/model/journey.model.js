@@ -1,3 +1,5 @@
+import mongoose, { Schema } from 'mongoose';
+
 const journeySchema = new Schema({
     ownerId: {
         type: Schema.Types.ObjectId,
@@ -30,3 +32,5 @@ const journeySchema = new Schema({
         default: true,
     },
 }, { timestamps: true });
+
+export const Journey = mongoose.model("Journey", journeySchema);

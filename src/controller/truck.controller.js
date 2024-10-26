@@ -1,7 +1,7 @@
 import { asyncHandler } from "../utils/async-Handler.js";
 import { ApiError } from "../utils/ApiError.js";
-import { Truck } from "../models/truck.model.js";
-import { Journey } from "../models/journey.model.js";
+import { Truck } from "../model/truck.model.js";
+import { Journey } from "../model/journey.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
