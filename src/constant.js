@@ -1,0 +1,1 @@
+export const DB_NAME = "Coal_Theft_Detection_Model"
