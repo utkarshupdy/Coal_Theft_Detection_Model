@@ -11,7 +11,7 @@ import {upload} from "../middleware/multer.middleware.js"
 import {verifyJWT} from "../middleware/auth.middleware.js"
 
 const router = Router()
-router.route("/add-truck").post(verifyJWT ,
+router.route("/add-truck").post( verifyJWT ,
     upload.fields([
         {
             name: "driverPhoto",

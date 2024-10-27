@@ -4,6 +4,7 @@ import { Truck } from "../model/truck.model.js";
 import { Journey } from "../model/journey.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import {User} from "../model/user.model.js"
 
 // 1. Owner adds a new truck to their dashboard
 const addTruck = asyncHandler(async (req, res) => {
