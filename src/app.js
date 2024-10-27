@@ -29,12 +29,17 @@ app.use(cookieParser()) // via cookie parser , we give access of all cookies to 
 
 import userRouter from "./route/user.router.js"
 import truckRouter from "./route/truck.router.js"
+import dataset from "./route/data.router.js"
 
  // routes decleration
  // to apply routes , use middleware here
 //  app.use("/users" , userRouter /* which router i want to activate at /user , whenever i type /user , middleware gives control to userrouter */)
  app.use("/api/v1/users/user" , userRouter)
  app.use("/api/v1/users/truck" , truckRouter)
+ app.use("/api/v1/users/dataset" , dataset )
+
+
+ 
  // http://localhost:8000/api/v1/users/register    "THIS IS HOW URL IS MADE" now no changes in app.js , if we want login , go to userrouter nd add login route
 
 //  http://localhost:8000/api/v1/users/user

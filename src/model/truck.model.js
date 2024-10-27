@@ -25,6 +25,10 @@ const truckSchema = new Schema({
         type: Number,
         required: true,
     },
+    status: {
+        type: Boolean,
+        default: false,
+    },
     ownerId: {
         type: Schema.Types.ObjectId,
         ref: 'User',

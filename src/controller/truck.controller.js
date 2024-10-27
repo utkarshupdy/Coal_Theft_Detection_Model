@@ -34,6 +34,8 @@ const addTruck = asyncHandler(async (req, res) => {
         vehicleNumber
     });
 
+    await User.findByIdAndUpdate(ownerId, { $inc: { numberOfTrucks: 1 } });
+
     return res.status(201).json(new ApiResponse(201, truck, "Truck added successfully"));
 });
 
@@ -75,6 +77,9 @@ const startTruckJourney = asyncHandler(async (req, res) => {
         isActive: true
     });
 
+    await Truck.findByIdAndUpdate(truck._id, { status: true });
+    
+
     res.status(201).json(new ApiResponse(201, "Journey started", newJourney));
 });
 
@@ -96,6 +101,7 @@ const endTruckJourney = asyncHandler(async (req, res) => {
     if (!activeJourney) {
         throw new ApiError(404, "No active journey found for this truck");
     }
+    await Truck.findByIdAndUpdate(truck._id, { status: false });
 
     res.status(200).json(new ApiResponse(200, "Journey ended successfully", activeJourney));
 });
