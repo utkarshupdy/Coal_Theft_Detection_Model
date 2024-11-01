@@ -34,17 +34,23 @@ const handleImageChange = (e) => {
     setLoading(true);
     
     try {
-      const response = await axios.post('http://192.168.137.153:8000/api/v1/users/truck/add-truck', {
-        vehicleNumber: data.vehicleNumber,
-        modelNumber: data.vehicleModel,
-        driverName: data.driverName,
-        driverContact: data.driverNumber,
-        driverPhoto: data.driverImage
-      } , {
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await axios.post(
+        'http://localhost:8000/api/v1/users/truck/add-truck',
+        {
+          vehicleNumber: data.vehicleNumber,
+          modelNumber: data.vehicleModel,
+          driverName: data.driverName,
+          driverContact: data.driverNumber,
+          driverPhoto: data.driverImage,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true, // Ensure this is included
         }
-      });
+      );
+      navigate("/user")
   
       console.log('Registration Vehicle successful:', response.data);
     } catch (error) {

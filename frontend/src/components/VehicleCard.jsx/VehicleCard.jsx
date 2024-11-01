@@ -33,7 +33,7 @@ const VehicleCard = ({ vehicleNumber, status, userId }) => {
   //   }
   // };
   const handleClick = () => {
-      navigate(`/analysis/${userId}/${vehicleNumber}`);
+      navigate(`/analyzer`);
   };
 
   const statusStyle = getStatusStyles();

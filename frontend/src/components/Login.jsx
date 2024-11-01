@@ -20,14 +20,24 @@ const Login = () => {
     console.log('Form submitted:', data); // Log the data
 
     try {
-      const response = await axios.post('http://192.168.137.153:8000/api/v1/users/user/login', {
+      // Define credentials object
+      const credentials = {
         email: data.email,
         password: data.password,
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
+      };
+
+      const response = await axios.post(
+        'http://localhost:8000/api/v1/users/user/login',
+        credentials,
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
-      });
+      );
+      
+
       console.log('Login successful:', response.data);
       navigate("/user");
     } catch (error) {

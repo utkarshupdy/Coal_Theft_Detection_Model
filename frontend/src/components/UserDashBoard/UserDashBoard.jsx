@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const UserDashboard = ({ user }) => {
   const { fullName, contact, email, avatar, numberOfTrucks } = user;
 
@@ -14,47 +15,40 @@ const UserDashboard = ({ user }) => {
 
       {/* User Profile Section */}
       <div className="bg-gray-800 rounded-lg shadow-lg p-6 mb-8 border border-gray-700">
-        <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex flex-col items-center">
           {/* Profile Photo */}
-          <div className="flex-shrink-0">
-            <div className="w-40 h-40 rounded-full overflow-hidden border-2 border-blue-400">
-              <img
-                src={avatar}
-                alt={fullName}
-                className="w-full h-full object-cover"
-              />
-            </div>
+          <div className="w-40 h-40 rounded-full overflow-hidden border-2 border-blue-400 mb-4">
+            <img
+              src={avatar}
+              alt={fullName}
+              className="w-full h-full object-cover"
+            />
           </div>
 
           {/* User Information */}
-          <div className="flex-grow">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <div className="flex items-center">
-                  <span className="font-semibold w-32 text-gray-400">Name:</span>
-                  <span className="text-white">{fullName}</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="font-semibold w-32 text-gray-400">Trucks Owned:</span>
-                  <span className="text-white">{numberOfTrucks}</span>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center">
-                  <span className="font-semibold w-32 text-gray-400">Phone:</span>
-                  <span className="text-white">{contact}</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="font-semibold w-32 text-gray-400">Email:</span>
-                  <span className="text-white">{email}</span>
-                </div>
-              </div>
+          <div className="space-y-4 text-center">
+            <div className="flex items-center justify-center">
+              <span className="font-semibold text-gray-400">Name:</span>
+              <span className="text-white ml-2">Chirag Garg</span>
+            </div>
+            <div className="flex items-center justify-center">
+              <span className="font-semibold text-gray-400">Trucks Owned:</span>
+              <span className="text-white ml-2">9</span>
+            </div>
+            <div className="flex items-center justify-center">
+              <span className="font-semibold text-gray-400">Phone:</span>
+              <span className="text-white ml-2">9340129430</span>
+            </div>
+            <div className="flex items-center justify-center">
+              <span className="font-semibold text-gray-400">Email:</span>
+              <span className="text-white ml-2">chirag@gmail.com</span>
             </div>
           </div>
         </div>
       </div>
     </div>
   );
+
 };
 
 export default UserDashboard;

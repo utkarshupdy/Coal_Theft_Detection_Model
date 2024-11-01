@@ -20,17 +20,17 @@ const addTruck = asyncHandler(async (req, res) => {
         throw new ApiError(409, "Truck with this vehicle number already exists");
     }
 
-    const driverPhotoPath = req.files?.driverPhoto[0]?.path;
-    if (!driverPhotoPath) throw new ApiError(400, "Driver photo file is required");
+    // const driverPhotoPath = req.files?.driverPhoto[0]?.path;
+    // if (!driverPhotoPath) throw new ApiError(400, "Driver photo file is required");
 
-    const driverPhoto = await uploadOnCloudinary(driverPhotoPath);
-    if (!driverPhoto) throw new ApiError(500, "Failed to upload driver photo");
+    // const driverPhoto = await uploadOnCloudinary(driverPhotoPath);
+    // if (!driverPhoto) throw new ApiError(500, "Failed to upload driver photo");
 
     const truck = await Truck.create({
         ownerId,
         modelNumber,
         driverName,
-        driverPhoto: driverPhoto.url,
+        // driverPhoto: driverPhoto.url,
         driverContact,
         vehicleNumber
     });

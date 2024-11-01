@@ -38,8 +38,8 @@ const Header = () => {
       active: !authStatus
     },
     { 
-      to: '/about', 
-      text: 'About Us',
+      to: '/analyzer', 
+      text: 'Analyze',
       active: true
     }
   ];

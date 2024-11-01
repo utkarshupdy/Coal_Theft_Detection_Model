@@ -54,25 +54,54 @@ const Signup = () => {
   // };
 
 
+  // const onSubmit = async (data) => {
+  //   setIsLoading(true);
+  //   try {
+  //     const response = await axios.post('http://localhost:8000/api/v1/users/user/register', {
+  //       email: data.email,
+  //       password: data.password,
+  //       fullName: data.name,
+  //       contact: data.phoneNumber,
+  //       avatar: data.profilePicture
+  //     });
+  //     navigate("/")
+  //     console.log('Register User successful:', response.data);
+  //   } catch (error) {
+  //     console.error('Register User error:', error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      const response = await axios.post('http://172.22.120.71:8000/api/v1/users/register', {
-        email: data.email,
-        password: data.password,
-        fullName: data.name,
-        contact: data.phoneNumber,
-        avatar: data.profilePicture
+      const formData = new FormData();
+      formData.append('fullName', data.name);
+      formData.append('email', data.email);
+      formData.append('contact', data.phoneNumber);
+      formData.append('password', data.password);
+  
+      // Check if a file was selected and add it to formData
+      if (data.profilePicture && data.profilePicture[0]) {
+        formData.append('avatar', data.profilePicture[0]); // Ensure `data.profilePicture` is a File object
+      }
+  
+      const response = await axios.post('http://localhost:8000/api/v1/users/user/register', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       });
-      navigate("/")
+  
+      navigate("/");
       console.log('Register User successful:', response.data);
     } catch (error) {
-      console.error('Register User error:', error);
+      console.error('Register User error:', error.response?.data || error.message);
     } finally {
       setIsLoading(false);
     }
   };
-
+  
 
   return (
     <div 

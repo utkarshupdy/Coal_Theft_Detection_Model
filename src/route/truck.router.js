@@ -12,17 +12,12 @@ import {verifyJWT} from "../middleware/auth.middleware.js"
 
 const router = Router()
 router.route("/add-truck").post( verifyJWT ,
-    upload.fields([
-        {
-            name: "driverPhoto",
-            maxCount:1,
-        }
-    ])  , addTruck
+     addTruck
 )
 
 router.route("/delete-truck").post(verifyJWT , deleteTruck);
 router.route("/start-truck-journey").post(verifyJWT , startTruckJourney);
-router.route("/list-owner-trucks").post(verifyJWT , listOwnerTrucks);
+router.route("/list-owner-trucks").get(verifyJWT ,  listOwnerTrucks);
 router.route("/end-truck-journey").post(verifyJWT , endTruckJourney);
 router.route("/get-active-journeys").post(verifyJWT , getActiveJourneys);
 

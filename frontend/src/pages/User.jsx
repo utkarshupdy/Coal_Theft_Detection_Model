@@ -5,40 +5,54 @@ import axios from "axios";
 import { FaPlus } from "react-icons/fa";
 
 const User = () => {
-  const [trucks, setTrucks] = useState([]);
+  let [trucks, setTrucks] = useState([]);
   const [userData, setUserData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  trucks = [
+    { vehicleNumber: 'TRK-001', status: true },
+    { vehicleNumber: 'TRK-002', status: false },
+    { vehicleNumber: 'TRK-003', status: true },
+    { vehicleNumber: 'TRK-004', status: false },
+    { vehicleNumber: 'TRK-005', status: true },
+    { vehicleNumber: 'TRK-006', status: false },
+    { vehicleNumber: 'TRK-007', status: true },
+    { vehicleNumber: 'TRK-008', status: true },
+    { vehicleNumber: 'TRK-009', status: false },
+  ];
 
   useEffect(() => {
-    const fetchTrucks = async () => {
+    const fetchData = async () => {
+      const token = localStorage.getItem("token"); // Adjust if the token is stored differently
+
       try {
-        const response = await axios.get('http://192.168.137.153:8000/api/v1/users/truck/list-owner-trucks');
-        setTrucks(response.data.data);
+        // Fetch User Data
+        const userResponse = await axios.get('http://localhost:8000/api/v1/users/user/current-user', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setUserData(userResponse.data.data);
+
+        // Fetch Truck Data
+        const trucksResponse = await axios.get('http://localhost:8000/api/v1/users/truck/list-owner-trucks', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setTrucks(trucksResponse.data.data);
       } catch (error) {
-        console.error('Error fetching trucks:', error);
+        console.error('Error fetching data:', error);
       } finally {
         setIsLoading(false);
       }
     };
 
-    fetchTrucks();
+    fetchData();
   }, []);
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get('http://192.168.137.153:8000/api/v1/users/current-user');
-        setUserData(response.data.data);
-      } catch (error) {
-        console.error('Error fetching UserData:', error);
-      }
-    };
-
-    fetchUserData();
-  }, []);
+  
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white py-8">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Main Layout */}
         <div className="flex flex-col lg:flex-row gap-8">
@@ -55,7 +69,7 @@ const User = () => {
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
               <h2 className="text-2xl font-bold text-white">My Vehicles</h2>
               <Link
-                to="/add-vehicle"
+                to="/addvehicle"
                 className="group flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg w-full sm:w-auto justify-center"
               >
                 <FaPlus className="text-sm group-hover:rotate-90 transition-transform duration-300" />
@@ -81,7 +95,7 @@ const User = () => {
                     <VehicleCard
                       vehicleNumber={truck.vehicleNumber}
                       status={truck.status}
-                      userId={userData._id}
+                      // userId={userData._id}
                     />
                   </div>
                 ))}
@@ -96,7 +110,7 @@ const User = () => {
                     🚛
                   </div>
                   <p className="text-gray-300 text-xl mb-4">
-                    Your fleet is empty! Start by adding your first vehicle.
+                    No Vehicle Availabe
                   </p>
                   <Link
                     to="/addvehicle"
@@ -113,6 +127,20 @@ const User = () => {
       </div>
     </div>
   );
+
 };
 
 export default User;
+
+
+
+
+
+
+
+
+
+
+
+
+

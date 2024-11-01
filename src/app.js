@@ -23,6 +23,12 @@ app.use(express.static("public")) // if we want to store something in over serve
 
 app.use(cookieParser()) // via cookie parser , we give access of all cookies to request and response of all middlewares nd all
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', process.env.CORS_ORIGIN); // Make sure this is set
+    res.header('Access-Control-Allow-Credentials', 'true');
+    next();
+});
+
 
  //***********************************ROUTES***********************************
 //  import userRouter from './route/user.router.js' // as user.routers.js export default a fxn , its doesn't matter what name u gove to that fxn here
