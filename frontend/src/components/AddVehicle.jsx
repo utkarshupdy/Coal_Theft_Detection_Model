@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
 
 const AddVehicle = () => {
@@ -38,7 +38,7 @@ const handleImageChange = (e) => {
     
     try {
       const response = await axios.post(
-        'http://localhost:8000/api/v1/users/truck/add-truck',
+        'https://coal-theft-detection-model.onrender.com/api/v1/users/truck/add-truck',
         {
           vehicleNumber: data.vehicleNumber,
           modelNumber: data.vehicleModel,

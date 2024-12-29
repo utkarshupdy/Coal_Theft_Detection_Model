@@ -11,7 +11,7 @@ function Map() {
     let intervalId;
     const fetchPosition = async () => {
       try {
-        const response = await fetch('http://192.168.137.153:8000/api/v1/users/dataset/get-data-points'); // Replace with your API endpoint
+        const response = await fetch('https://coal-theft-detection-model.onrender.com/api/v1/users/dataset/get-data-points'); // Replace with your API endpoint
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

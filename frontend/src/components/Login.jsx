@@ -31,7 +31,7 @@ const Login = () => {
 
       // Make login request
       const response = await axios.post(
-        'http://localhost:8000/api/v1/users/user/login',
+        'https://coal-theft-detection-model.onrender.com/api/v1/users/user/login',
         credentials,
         {
           withCredentials: true,

@@ -21,7 +21,7 @@ const VehicleJourney = () => {
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      const response = await axios.post(' http://localhost:8000/api/v1/users/truck/start-truck-journey', {
+      const response = await axios.post('https://coal-theft-detection-model.onrender.com/api/v1/users/truck/start-truck-journey', {
         vehicleNumber: data.vehicleNumber,
         startLocation: data.startLocation,
         endLocation: data.endLocation

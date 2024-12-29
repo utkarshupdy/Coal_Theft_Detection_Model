@@ -14,4 +14,7 @@ export default defineConfig({
       maxAge: 3600,
     },
   },
+  build:{
+    outDir: 'dist'
+  }
 })

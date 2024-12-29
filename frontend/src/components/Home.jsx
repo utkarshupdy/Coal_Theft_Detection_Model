@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { 
   MdNotifications, 
-  MdSecurity, 
+  // MdSecurity, 
   MdDashboard,
   MdAnalytics,
-  MdWarning,
+  // MdWarning,
   MdShield 
 } from 'react-icons/md';
 import { RiDatabase2Fill } from 'react-icons/ri';

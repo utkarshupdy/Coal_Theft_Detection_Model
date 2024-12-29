@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 // import { LineChart, Map } from '../components/index';
 import axios from 'axios';
 import LineChartFinal  from './LineChartFinal'
@@ -34,7 +34,7 @@ const Analyzer = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem('accessToken'); // Assuming the access token is stored in localStorage
-        const response = await axios.get('http://localhost:8000/api/v1/users/user/current-user', {
+        const response = await axios.get('https://coal-theft-detection-model.onrender.com/api/v1/users/user/current-user', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserData(response.data.data);

@@ -94,7 +94,7 @@ const Signup = () => {
           requestBody.avatar = reader.result; // Add avatar to requestBody as Base64 string
   
           // Make the API call
-          const response = await axios.post('http://localhost:8000/api/v1/users/user/register', requestBody, {
+          const response = await axios.post('https://coal-theft-detection-model.onrender.com/api/v1/users/user/register', requestBody, {
             headers: {
               'Content-Type': 'application/json',
             },
@@ -107,7 +107,7 @@ const Signup = () => {
         reader.readAsDataURL(file);
       } else {
         // If no avatar is provided, make the API call directly
-        const response = await axios.post('http://localhost:8000/api/v1/users/user/register', requestBody, {
+        const response = await axios.post('https://coal-theft-detection-model.onrender.com/api/v1/users/user/register', requestBody, {
           headers: {
             'Content-Type': 'application/json',
           },

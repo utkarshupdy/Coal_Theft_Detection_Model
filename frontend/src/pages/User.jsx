@@ -23,7 +23,7 @@ const User = () => {
       try {
         // Fetch User Data
         const userResponse = await axios.get(
-          "http://localhost:8000/api/v1/users/user/current-user",
+          "https://coal-theft-detection-model.onrender.com/api/v1/users/user/current-user",
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -35,7 +35,7 @@ const User = () => {
 
         // Fetch Truck Data
         const trucksResponse = await axios.get(
-          "http://localhost:8000/api/v1/users/truck/list-owner-trucks",
+          "https://coal-theft-detection-model.onrender.com/api/v1/users/truck/list-owner-trucks",
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,

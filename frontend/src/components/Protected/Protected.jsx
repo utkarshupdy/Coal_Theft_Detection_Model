@@ -1,5 +1,5 @@
 // components/ProtectedRoute.jsx
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const ProtectedAnalysis = ({ children }) => {
