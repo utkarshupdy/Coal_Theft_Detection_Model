@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 
 
@@ -13,6 +13,7 @@ const VehicleCard = ({ vehicleNumber , vehicleModel , driverName , driverNumber,
   console.log(driverNumber);
   const navigate = useNavigate();
   // const { user } = useSelector((state) => state.auth);
+  status = true;
 
   const getStatusStyles = () => {
     switch (status) {

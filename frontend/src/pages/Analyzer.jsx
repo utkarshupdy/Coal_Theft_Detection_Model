@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { LineChart, Map } from '../components/index';
+// import { LineChart, Map } from '../components/index';
 import axios from 'axios';
 import LineChartFinal  from './LineChartFinal'
 import MapFinal  from './MapFinal'
-import { useLocation ,Link, useNavigate } from 'react-router-dom'
+import { useLocation , useNavigate } from 'react-router-dom'
 
 
 
@@ -13,7 +13,7 @@ import { useLocation ,Link, useNavigate } from 'react-router-dom'
 
 
 const Analyzer = () => {
-  const authStatus = useSelector((state) => state.auth.status);
+  // const authStatus = useSelector((state) => state.auth.status);
   const navigate = useNavigate();
   const location = useLocation();
   

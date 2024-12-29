@@ -8,8 +8,8 @@ const AddVehicle = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const userData = useSelector((state) => state.auth.userData);
+  // const dispatch = useDispatch();
+  // const userData = useSelector((state) => state.auth.userData);
   const [previewImage, setPreviewImage] = useState(null);
 
 

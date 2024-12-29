@@ -1,7 +1,7 @@
 import './App.css'
-import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { login, logout } from './store/authSlice';
+// import { useEffect, useState } from 'react'
+// import { useDispatch } from 'react-redux'
+// import { login, logout } from './store/authSlice';
 import { Footer, Header } from './components';
 import { Outlet } from 'react-router-dom';
 

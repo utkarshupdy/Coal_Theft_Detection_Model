@@ -7,7 +7,7 @@ import {
     endTruckJourney,
     getActiveJourneys
 } from "../controller/truck.controller.js"
-import {upload} from "../middleware/multer.middleware.js"
+// import {upload} from "../middleware/multer.middleware.js"
 import {verifyJWT} from "../middleware/auth.middleware.js"
 
 const router = Router()

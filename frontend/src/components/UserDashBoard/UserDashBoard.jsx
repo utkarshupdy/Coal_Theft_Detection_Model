@@ -1,8 +1,9 @@
 import React from 'react';
+// import {img} from './user.png'
 
 
 const UserDashboard = ({ user }) => {
-  const { fullName, contact, email, avatar, numberOfTrucks } = user;
+  const { fullName, contact, email, numberOfTrucks } = user;
 
   return (
     <div className="max-w-7xl mx-auto p-6 bg-gray-900 min-h-screen">
@@ -20,6 +21,7 @@ const UserDashboard = ({ user }) => {
           <div className="w-40 h-40 rounded-full overflow-hidden border-2 border-blue-400 mb-4">
             <img
               src={"https://img.freepik.com/premium-photo/confident-small-business-owner-with-crossed-arms-ai-generated_804788-34374.jpg"}
+              // src= {img}
               alt={fullName}
               className="w-full h-full object-cover"
             />

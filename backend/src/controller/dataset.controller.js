@@ -1,4 +1,4 @@
-import fs from 'fs/promises';
+// import fs from 'fs/promises';
 import { asyncHandler } from "../utils/async-Handler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
@@ -8,7 +8,7 @@ import dataArray from '../data (1).json' assert { type: 'json' }; // Adjust the 
 
 let currentIndex = 0;
 
-const getNextDataPoint = asyncHandler(async (req, res) => {
+const getNextDataPoint = asyncHandler(async ( _ , res) => {
     try {
         if (currentIndex < dataArray.length) {
             const dataPoint = dataArray[currentIndex];

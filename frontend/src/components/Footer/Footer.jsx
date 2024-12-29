@@ -19,7 +19,7 @@ const Footer = () => {
             <div className="flex space-x-4">
               {/* Social Media Links */}
               <a
-                href="https://instagram.com/tusharpaik__"
+                href="https://instagram.com/utkarshupdy.exe"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-blue-400 transform hover:scale-110 transition-all duration-300"
@@ -86,15 +86,15 @@ const Footer = () => {
                   href="mailto:tusharpaik543@gmail.com"
                   className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:translate-x-2 inline-block"
                 >
-                  tusharpaik543@gmail.com
+                  ukupadhyay6789@gmail.com
                 </a>
               </li>
               <li>
                 <a
-                  href="tel:+919340622196"
+                  href="tel:+917309466387"
                   className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:translate-x-2 inline-block"
                 >
-                  +919340622196
+                  +917309466387
                 </a>
               </li>
             </ul>

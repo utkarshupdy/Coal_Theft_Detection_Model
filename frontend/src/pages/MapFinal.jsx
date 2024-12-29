@@ -9,6 +9,7 @@ function MapFinal() {
   const [currentPosition, setCurrentPosition] = useState(positions[0]);
   const [isPlaying, setIsPlaying] = useState(true);
 
+
   const startLocation = {
     lat: 21.250000,
     lng: 81.629997
