@@ -5,7 +5,9 @@
   "main": "index.js",
   "type" :"module",
   "scripts": {
-    "start": "node -r dotenv/config src/index.js"
+    "start": "node src/index.js",
+    "build": "npm install", 
+    "dev": "nodemon -r dotenv/config src/index.js"
   },
   "author": "utkarshupdy",
   "license": "ISC",
