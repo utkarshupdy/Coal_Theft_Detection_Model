@@ -4,7 +4,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
 // Directly import the JSON file
-import dataArray from '../data (1).json' assert { type: 'json' }; // Adjust the path as necessary
+// import dataArray from '../data (1).json' assert { type: 'json' }; // Adjust the path as necessary
 
 let currentIndex = 0;
 
