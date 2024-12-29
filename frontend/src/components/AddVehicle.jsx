@@ -30,6 +30,9 @@ const handleImageChange = (e) => {
     formState: { errors },
   } = useForm();
 
+  const accessToken = localStorage.getItem("accessToken");
+
+
   const onSubmit = async (data) => {
     setLoading(true);
     
@@ -46,6 +49,7 @@ const handleImageChange = (e) => {
         {
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
           },
           withCredentials: true, // Ensure this is included
         }

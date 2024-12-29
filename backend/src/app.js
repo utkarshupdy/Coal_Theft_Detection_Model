@@ -24,10 +24,12 @@ app.use(express.static("public")) // if we want to store something in over serve
 app.use(cookieParser()) // via cookie parser , we give access of all cookies to request and response of all middlewares nd all
 
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', process.env.CORS_ORIGIN); // Make sure this is set
+    console.log('Request Origin:', req.headers.origin);  // Log origin for debugging
+    res.header('Access-Control-Allow-Origin', process.env.CORS_ORIGIN); // Set header dynamically
     res.header('Access-Control-Allow-Credentials', 'true');
     next();
 });
+
 
 
  //***********************************ROUTES***********************************

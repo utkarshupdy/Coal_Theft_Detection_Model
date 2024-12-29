@@ -4,7 +4,13 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const VehicleCard = ({ vehicleNumber, status, userId }) => {
+
+
+const VehicleCard = ({ vehicleNumber , vehicleModel , driverName , driverNumber, status, userId }) => {
+  console.log(vehicleModel);
+  console.log(vehicleNumber);
+  console.log(driverName);
+  console.log(driverNumber);
   const navigate = useNavigate();
   // const { user } = useSelector((state) => state.auth);
 
@@ -33,8 +39,19 @@ const VehicleCard = ({ vehicleNumber, status, userId }) => {
   //   }
   // };
   const handleClick = () => {
-      navigate(`/analyzer`);
+    navigate(`/analyzer`, { 
+      state: { 
+        vehicleNumber, 
+        vehicleModel, 
+        driverName, 
+        driverNumber, 
+        userId, 
+        status, 
+      } 
+    });
   };
+  
+  
 
   const statusStyle = getStatusStyles();
 
@@ -97,7 +114,7 @@ const VehicleCard = ({ vehicleNumber, status, userId }) => {
 VehicleCard.propTypes = {
   vehicleNumber: PropTypes.string.isRequired,
   status: PropTypes.oneOf([true, false]).isRequired,
-  userId: PropTypes.string.isRequired,
+  userId: PropTypes.string,
 };
 
 export default VehicleCard;

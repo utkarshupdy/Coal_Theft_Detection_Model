@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { VehicleCard, UserDashboard } from "../components/index";
 import axios from "axios";
 import { FaPlus } from "react-icons/fa";
@@ -8,40 +8,47 @@ const User = () => {
   let [trucks, setTrucks] = useState([]);
   const [userData, setUserData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  trucks = [
-    { vehicleNumber: 'TRK-001', status: true },
-    { vehicleNumber: 'TRK-002', status: false },
-    { vehicleNumber: 'TRK-003', status: true },
-    { vehicleNumber: 'TRK-004', status: false },
-    { vehicleNumber: 'TRK-005', status: true },
-    { vehicleNumber: 'TRK-006', status: false },
-    { vehicleNumber: 'TRK-007', status: true },
-    { vehicleNumber: 'TRK-008', status: true },
-    { vehicleNumber: 'TRK-009', status: false },
-  ];
+  const [isUnauthorized, setIsUnauthorized] = useState(false); // State to track unauthorized access
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem("token"); // Adjust if the token is stored differently
+      const accessToken = localStorage.getItem("accessToken");
+
+      if (!accessToken) {
+        setIsUnauthorized(true);
+        return;
+      }
 
       try {
         // Fetch User Data
-        const userResponse = await axios.get('http://localhost:8000/api/v1/users/user/current-user', {
-          headers: {
-            Authorization: `Bearer ${token}`
+        const userResponse = await axios.get(
+          "http://localhost:8000/api/v1/users/user/current-user",
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+            withCredentials: true,
           }
-        });
+        );
         setUserData(userResponse.data.data);
 
         // Fetch Truck Data
-        const trucksResponse = await axios.get('http://localhost:8000/api/v1/users/truck/list-owner-trucks', {
-          headers: {
-            Authorization: `Bearer ${token}`
+        const trucksResponse = await axios.get(
+          "http://localhost:8000/api/v1/users/truck/list-owner-trucks",
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+            withCredentials: true,
           }
-        });
+        );
         setTrucks(trucksResponse.data.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
+        if (error.response && error.response.status === 401) {
+          setIsUnauthorized(true); // Mark as unauthorized if 401 status is received
+        }
       } finally {
         setIsLoading(false);
       }
@@ -49,7 +56,27 @@ const User = () => {
 
     fetchData();
   }, []);
-  
+
+  if (isUnauthorized) {
+    // Render unauthorized access message
+    return (
+      <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
+        <div className="text-center space-y-6">
+          <h1 className="text-3xl font-bold">Unauthorized Access</h1>
+          <p className="text-gray-400">
+            You are not authorized to access this page. Please log in to
+            continue.
+          </p>
+          <button
+            onClick={() => navigate("/login")}
+            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300"
+          >
+            Go to Login
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white py-8">
@@ -88,14 +115,21 @@ const User = () => {
               // Vehicles Grid
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                 {trucks.map((truck) => (
-                  <div 
+                  <div
                     key={truck.vehicleNumber}
                     className="transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
                   >
                     <VehicleCard
                       vehicleNumber={truck.vehicleNumber}
+                      vehicleModel={truck.modelNumber}
+                      driverName={truck.driverName}
+                      driverNumber={truck.driverContact}
                       status={truck.status}
-                      // userId={userData._id}
+                      userId={userData._id}
+                      ownerDetails={{
+                        name: userData.name,
+                        contact: userData.contact,
+                      }}
                     />
                   </div>
                 ))}
@@ -127,20 +161,6 @@ const User = () => {
       </div>
     </div>
   );
-
 };
 
 export default User;
-
-
-
-
-
-
-
-
-
-
-
-
-

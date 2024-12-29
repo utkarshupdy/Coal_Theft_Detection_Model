@@ -8,6 +8,7 @@ import {User} from "../model/user.model.js"
 
 // 1. Owner adds a new truck to their dashboard
 const addTruck = asyncHandler(async (req, res) => {
+    console.log(req.user);
     const { modelNumber, driverName, driverContact, vehicleNumber } = req.body;
     const ownerId = req.user._id;
 

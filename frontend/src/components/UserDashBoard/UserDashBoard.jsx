@@ -19,7 +19,7 @@ const UserDashboard = ({ user }) => {
           {/* Profile Photo */}
           <div className="w-40 h-40 rounded-full overflow-hidden border-2 border-blue-400 mb-4">
             <img
-              src={avatar}
+              src={"https://img.freepik.com/premium-photo/confident-small-business-owner-with-crossed-arms-ai-generated_804788-34374.jpg"}
               alt={fullName}
               className="w-full h-full object-cover"
             />
@@ -29,19 +29,19 @@ const UserDashboard = ({ user }) => {
           <div className="space-y-4 text-center">
             <div className="flex items-center justify-center">
               <span className="font-semibold text-gray-400">Name:</span>
-              <span className="text-white ml-2">Chirag Garg</span>
+              <span className="text-white ml-2">{fullName}</span>
             </div>
             <div className="flex items-center justify-center">
               <span className="font-semibold text-gray-400">Trucks Owned:</span>
-              <span className="text-white ml-2">9</span>
+              <span className="text-white ml-2">{numberOfTrucks}</span>
             </div>
             <div className="flex items-center justify-center">
               <span className="font-semibold text-gray-400">Phone:</span>
-              <span className="text-white ml-2">9340129430</span>
+              <span className="text-white ml-2">{contact}</span>
             </div>
             <div className="flex items-center justify-center">
               <span className="font-semibold text-gray-400">Email:</span>
-              <span className="text-white ml-2">chirag@gmail.com</span>
+              <span className="text-white ml-2">{email}</span>
             </div>
           </div>
         </div>

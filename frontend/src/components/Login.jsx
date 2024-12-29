@@ -2,11 +2,14 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux'; // Import useDispatch
+import { login } from '../store/authSlice'; // Import the login action
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  
+  const dispatch = useDispatch(); // Initialize dispatch
+
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       email: '',
@@ -26,6 +29,7 @@ const Login = () => {
         password: data.password,
       };
 
+      // Make login request
       const response = await axios.post(
         'http://localhost:8000/api/v1/users/user/login',
         credentials,
@@ -36,10 +40,28 @@ const Login = () => {
           },
         }
       );
-      
 
+      // Log the response and store the tokens in localStorage
       console.log('Login successful:', response.data);
+
+      // Store tokens in localStorage
+      const { accessToken, refreshToken, userData } = response.data.data;
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+
+      // Dispatch the login action to store user data in Redux
+      dispatch(login({ userData })); // Dispatch the login action
+
+      // Optionally handle the "Remember me" feature here
+      if (data.rememberMe) {
+        // If "Remember me" is checked, you can store tokens for longer duration
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+      }
+
+      // Redirect to the user dashboard
       navigate("/user");
+
     } catch (error) {
       if (error.response) {
         console.error('Error data:', error.response.data);
@@ -53,18 +75,7 @@ const Login = () => {
       setIsLoading(false);
     }
   };
-  
-  // const onSubmit = async (data) => {
-  //   setIsLoading(true);
-  //   try {
-  //     console.log('Form submitted:', data);
-  //     await new Promise((resolve) => setTimeout(resolve, 1000));
-  //   } catch (error) {
-  //     console.error('Login error:', error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
+
   return (
     <div 
       className="min-h-screen flex items-center justify-center  px-4 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat"
@@ -104,9 +115,7 @@ const Login = () => {
                     message: 'Please enter a valid email',
                   },
                 })}
-                className={`appearance-none rounded-lg relative block w-full px-4 py-3 bg-gray-700/50 border ${
-                  errors.email ? 'border-red-500' : 'border-gray-600'
-                } placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-base`}
+                className={`appearance-none rounded-lg relative block w-full px-4 py-3 bg-gray-700/50 border ${errors.email ? 'border-red-500' : 'border-gray-600'} placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-base`}
                 placeholder="Email address"
               />
               {errors.email && (
@@ -128,10 +137,8 @@ const Login = () => {
                     message: 'Password must be at least 6 characters',
                   },
                 })}
-                className={`appearance-none rounded-lg relative block w-full px-4 py-3 bg-gray-700/50 border ${
-                  errors.password ? 'border-red-500' : 'border-gray-600'
-                } placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-base`}
-                placeholder="Password" 
+                className={`appearance-none rounded-lg relative block w-full px-4 py-3 bg-gray-700/50 border ${errors.password ? 'border-red-500' : 'border-gray-600'} placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-base`}
+                placeholder="Password"
               />
               {errors.password && (
                 <p className="mt-2 text-sm text-red-400 bg-red-400/10 px-3 py-1 rounded-md">{errors.password.message}</p>
@@ -162,12 +169,7 @@ const Login = () => {
           <div>
             <button
               type="submit"
-              className={`group relative w-full flex justify-center py-3 px-4 border border-transparent text-base font-medium rounded-lg text-white shadow-lg
-                ${isLoading 
-                  ? 'bg-gray-600 cursor-not-allowed opacity-75' 
-                  : 'bg-gradient-to-r from-blue-400 to-cyan-400 hover:from-blue-500 hover:to-cyan-500 hover:shadow-blue-500/25'
-                } 
-                transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-gray-900`}
+              className={`group relative w-full flex justify-center py-3 px-4 border border-transparent text-base font-medium rounded-lg text-white shadow-lg ${isLoading ? 'bg-gray-600 cursor-not-allowed opacity-75' : 'bg-gradient-to-r from-blue-400 to-cyan-400 hover:from-blue-500 hover:to-cyan-500 hover:shadow-blue-500/25'} transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-gray-900`}
               disabled={isLoading}
             >
               {isLoading ? (

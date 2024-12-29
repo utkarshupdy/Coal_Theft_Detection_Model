@@ -75,32 +75,54 @@ const Signup = () => {
 
   const onSubmit = async (data) => {
     setIsLoading(true);
+  
     try {
-      const formData = new FormData();
-      formData.append('fullName', data.name);
-      formData.append('email', data.email);
-      formData.append('contact', data.phoneNumber);
-      formData.append('password', data.password);
+      const requestBody = {
+        fullName: data.name,
+        email: data.email,
+        contact: data.phoneNumber,
+        password: data.password,
+      };
   
-      // Check if a file was selected and add it to formData
+      // If an avatar is provided, handle it properly
       if (data.profilePicture && data.profilePicture[0]) {
-        formData.append('avatar', data.profilePicture[0]); // Ensure `data.profilePicture` is a File object
+        const file = data.profilePicture[0];
+        const reader = new FileReader();
+  
+        // Convert the file to a Base64 string
+        reader.onloadend = async () => {
+          requestBody.avatar = reader.result; // Add avatar to requestBody as Base64 string
+  
+          // Make the API call
+          const response = await axios.post('http://localhost:8000/api/v1/users/user/register', requestBody, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+  
+          navigate('/login');
+          console.log('Register User successful:', response.data);
+        };
+  
+        reader.readAsDataURL(file);
+      } else {
+        // If no avatar is provided, make the API call directly
+        const response = await axios.post('http://localhost:8000/api/v1/users/user/register', requestBody, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+  
+        navigate('/login');
+        console.log('Register User successful:', response.data);
       }
-  
-      const response = await axios.post('http://localhost:8000/api/v1/users/user/register', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-  
-      navigate("/");
-      console.log('Register User successful:', response.data);
     } catch (error) {
       console.error('Register User error:', error.response?.data || error.message);
     } finally {
       setIsLoading(false);
     }
   };
+  
   
 
   return (
