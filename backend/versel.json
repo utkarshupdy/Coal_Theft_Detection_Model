@@ -1,0 +1,10 @@
+{
+    "version": 2,
+    "name": "real-time-transport-monitoring-app",
+    "builds": [
+       { "src": "app.js", "use": "@vercel/node" }
+    ],
+    "routes": [
+       { "src": "/(.*)", "dest": "/app.js" }
+    ]
+ }
